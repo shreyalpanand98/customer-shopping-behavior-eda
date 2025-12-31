@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Shopping Behavior Analysis (EDA)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <script>
+    function openTab(event, tabId) {
+      const tabs = document.querySelectorAll(".tab");
+      const contents = document.querySelectorAll(".tab-content");
+
+      tabs.forEach((tab) => tab.classList.remove("active"));
+      contents.forEach((content) => content.classList.remove("active"));
+
+      event.currentTarget.classList.add("active");
+      document.getElementById(tabId).classList.add("active");
+    }
+  </script>
+
+  <body>
+    <header class="container">
+      <p class="tag">Data Science Project • EDA</p>
+      <h1>Customer Shopping Behavior Analysis</h1>
+      <p class="subtitle">
+        Exploratory data analysis to uncover spending patterns, category revenue
+        drivers, and the impact of discounts on purchase behavior.
+      </p>
+
+      <div class="buttons">
+        <a
+          class="btn primary"
+          href="https://github.com/shreyalpanand98/customer-shopping-behavior-eda"
+          target="_blank"
+          rel="noreferrer"
+          >GitHub Repo</a
+        >
+        <a
+          class="btn"
+          href="https://www.kaggle.com/code/shreyalanand98/eda-project-1"
+          target="_blank"
+          rel="noreferrer"
+          >Kaggle Notebook</a
+        >
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="tabs">
+        <button class="tab active" onclick="openTab(event, 'overview')">
+          Overview
+        </button>
+        <button class="tab" onclick="openTab(event, 'gender')">
+          Gender vs Spending
+        </button>
+        <button class="tab" onclick="openTab(event, 'category')">
+          Category Revenue
+        </button>
+        <button class="tab" onclick="openTab(event, 'discount')">
+          Discount Impact
+        </button>
+        <button class="tab" onclick="openTab(event, 'age')">
+          Age vs Spending
+        </button>
+        <button class="tab" onclick="openTab(event, 'insights')">
+          Key Insights
+        </button>
+      </div>
+
+      <section id="overview" class="tab-content active">
+        <h2>Project Overview</h2>
+        <p>
+          This project explores customer shopping behavior using exploratory
+          data analysis (EDA) to understand spending patterns, revenue-driving
+          categories, and the role of discounts.
+        </p>
+        <p><strong>Dataset:</strong> Kaggle – Customer Shopping Trends</p>
+        <p><strong>Tools:</strong> Python, Pandas, Matplotlib, Seaborn</p>
+      </section>
+
+      <section id="gender" class="tab-content">
+        <h2>Spending by Gender</h2>
+        <p>
+          This analysis compares average purchase amounts across genders to
+          identify differences in spending behavior.
+        </p>
+        <img src="EDA_graphs/gender_spending.png" alt="Spending by Gender" />
+        <br />
+        <br />
+        <div id="genderChart"></div>
+
+        <div class="chart-summary">
+          <h3>Key Insight</h3>
+          <p>
+            This visualization shows the mean purchase amount
+            grouped by gender, allowing for a comparison of central tendency
+            across demographic segments.
+            <ul>
+                <li><strong>Observation:</strong>
+                The average purchase amounts for male and female customers are
+                nearly identical, with only a marginal difference between the two
+                groups. The overlap suggests low effect size, indicating that gender
+                does not meaningfully explain variance in purchase amount.</li>
+                <br/>
+                <li><strong>Interpretation:</strong>
+                Because the central tendency is similar across
+                genders, gender alone appears to have limited predictive power for
+                purchase value in this dataset. Any observed difference is likely
+                outweighed by other factors such as product category, purchasing
+                context, or discount application.</li>
+                <br/>
+                <li><strong>Implication for modeling / decision-making:</strong>
+                Gender may be better
+                utilized as a secondary or interaction feature rather than a primary
+                driver in predictive models or segmentation strategies. Feature
+                combinations involving behavioral variables are likely to yield
+                stronger explanatory and predictive performance.</li>
+                <br/>
+            </ul>
+            
+          </p>
+        </div>
+      </section>
+
+      <section id="category" class="tab-content">
+        <h2>Revenue by Product Category</h2>
+        <p>
+          A small number of product categories contribute disproportionately to
+          total revenue, highlighting key focus areas for business strategy.
+        </p>
+        <img src="EDA_graphs/tot_revenue.png" alt="Category Revenue" />
+        <br />
+        <br />
+        <div id="genderChart"></div>
+
+        <div class="chart-summary">
+          <h3>Key Insight</h3>
+          <p>
+            This visualization shows the total revenue aggregated by product category, highlighting how revenue contribution varies across categories.
+            <ul>
+                <li><strong>Observation:</strong>
+                Revenue distribution across categories is highly skewed, with a small subset of categories accounting for a disproportionately large share of total revenue. The leading category generates significantly more revenue than the remaining categories, indicating an uneven contribution pattern.</li>
+                <br/>
+                <li><strong>Interpretation:</strong>
+                The skewed distribution suggests a Pareto-like effect, where a minority of product categories drive the majority of revenue. Lower-revenue categories contribute marginally in comparison, which may reflect differences in demand, pricing, purchase frequency, or product availability..</li>
+                <br/>
+                <li><strong>Implication for modeling / decision-making:</strong>
+                Product category emerges as a high-impact explanatory feature and should be prioritized in downstream modeling and segmentation efforts. From a business perspective, optimizing inventory, pricing, and promotions for top-performing categories is likely to yield a higher return on investment than uniformly distributing resources across all categories.</li>
+                <br/>
+            </ul>
+            
+          </p>
+        </div>
+      </section>
+
+      <section id="discount" class="tab-content">
+        <h2>Discount Impact on Spending</h2>
+        <p>
+          Box plots are used to compare purchase amounts when discounts are
+          applied versus not applied.
+        </p>
+        <img src="EDA_graphs/discount_purchase.png" alt="Discount Impact" />
+        <br />
+        <br />
+        <div id="genderChart"></div>
+
+        <div class="chart-summary">
+          <h3>Key Insight</h3>
+          <p>
+            This box plot compares the distribution of purchase amounts for transactions where a discount was applied versus those without a discount, using median, interquartile range (IQR), and overall spread.
+            <ul>
+                <li><strong>Observation:</strong>
+                The median purchase amount is approximately the same for discounted and non-discounted transactions. Both groups exhibit similar interquartile ranges and overall dispersion, with comparable minimum and maximum values.</li>
+                <br/>
+                <li><strong>Interpretation:</strong>
+                The substantial overlap in distributions suggests that applying a discount does not materially increase purchase amount on a per transaction basis. While discounts may influence purchase likelihood or conversion rates, their effect on spending magnitude appears limited in this dataset.</li>
+                <br/>
+                <li><strong>Implication for modeling / decision-making:</strong>
+                Discount application alone may have low marginal explanatory power for predicting purchase amount. In predictive models, discount status should likely be combined with other contextual features such as product category, customer segment, or purchase frequency to capture meaningful interactions. From a business perspective, this supports the use of targeted, behavior - aware discount strategies rather than uniform discounting.</li>
+                <br/>
+            </ul>
+            
+          </p>
+        </div>
+      </section>
+
+      <section id="age" class="tab-content">
+        <h2>Age vs Purchase Amount</h2>
+        <p>
+          The scatter plot shows no strong correlation between age and purchase
+          amount, suggesting age alone is not a strong predictor of spending.
+        </p>
+        <img src="EDA_graphs/age_spending.png" alt="Age vs Spending" />
+        <br />
+        <br />
+        <div id="genderChart"></div>
+
+        <div class="chart-summary">
+          <h3>Key Insight</h3>
+          <p>
+            This scatter plot visualizes the relationship between customer age and purchase amount, allowing assessment of correlation, spread, and potential age-driven spending patterns.
+            <ul>
+                <li><strong>Observation:</strong>
+                Purchase amounts are widely distributed across all age groups, with no visible upward or downward trend. High and low purchase values appear at nearly every age, indicating substantial overlap across the age range.</li>
+                <br/>
+                <li><strong>Interpretation:</strong>
+                The absence of a discernible trend suggests little to no linear correlation between age and purchase amount. Age, as an isolated demographic variable, does not explain meaningful variance in spending behavior within this dataset.</li>
+                <br/>
+                <li><strong>Implication for modeling / decision-making:</strong>
+                Age is likely to have low standalone predictive value in regression or classification models targeting purchase amount. It may be more effective as part of interaction terms or nonlinear transformations when combined with behavioral features such as product category, purchase frequency, or discount usage. From a business standpoint, this supports shifting focus from age-based segmentation toward behavior-driven personalization strategies.</li>
+                <br/>
+            </ul>
+            
+          </p>
+        </div>
+      </section>
+
+      <section id="insights" class="tab-content">
+        <h2>Key Insights & Takeaways</h2>
+        <ul>
+          <li>Age alone is not a strong predictor of purchase amount.</li>
+          <li>A few categories drive most of the revenue.</li>
+          <li>
+            Discounts influence purchases but do not always increase spend.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <p>
+        Built by Shreyal Anand •
+        <a
+          href="https://www.linkedin.com/in/shreyalanand/"
+          target="_blank"
+          rel="noreferrer"
+          >LinkedIn</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>
